@@ -32,7 +32,7 @@ export default function App() {
 
 
   return (
-    <div className="App">
+    <div className="form">
       <h1>Join us today!</h1>
       <form>
         <label>Email:</label>
