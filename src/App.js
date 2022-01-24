@@ -1,14 +1,16 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 export default function App() {
   const [isValid, setIsValid] = useState(false);
   const [message, setMessage] = useState('');
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const emailRules = /\S+@\S+\.\S+/;
   const passwordRules = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-  const validateEmail = (event) => {
+  const validateEmail = useCallback((event) => {
     const email = event.target.value;
     if (emailRules.test(email)) {
       setIsValid(true);
@@ -17,7 +19,7 @@ export default function App() {
       setIsValid(false);
       setMessage('❗Please enter a valid email!');
     }
-  };
+  });
 
   const validatePassword = (event) => {
     const password = event.target.value;
@@ -57,27 +59,53 @@ export default function App() {
     }
   };
 
+  // Password visibility toggle
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  // Terms and conditions checkbox
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   return (
     <div className="form">
       <h1>Join us today!</h1>
       <form>
-        <label>Email:</label>
+        <label for="email">Email:</label>
         <input
           type="email"
+          class="input"
           required
           name="email"
           onChange={validateEmail}
         />
-        <label>Password:</label>
+        <label for="password">Password:</label>
+
+      <div class="password">
         <input
-          type="text"
+          type={passwordShown ? "text" : "password"}
+          class="input"
           required
           name="password"
           onChange={validatePassword}
         />
-        <button type="submit">Submit</button>
-        <div className={`message ${isValid ? 'success' : 'error'}`}>
+        <button class="toggle" onClick={togglePassword}>🙈</button>
+      </div>
+
+        <div class="tnc">
+          <input
+            type="checkbox"
+            required
+            name="tnc"
+            checked={isChecked}
+            onChange={handleOnChange}
+          />
+          <p>Please read these <a href="">terms and conditions</a> carefully before proceeding any further.</p>
+        </div>
+        <button class="submit" type="submit">Submit</button>
+        <div className={`message ${isValid ? "success" : "error"}`}>
           {message}
         </div>
       </form>
