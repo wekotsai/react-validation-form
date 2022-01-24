@@ -102,7 +102,7 @@ export default function App() {
             checked={isChecked}
             onChange={handleOnChange}
           />
-          <p>Please read these <a href="">terms and conditions</a> carefully before proceeding any further.</p>
+          <p>Please read these <a href="https://www.data4life.care/en/data-privacy/">terms and conditions</a> carefully before proceeding any further.</p>
         </div>
         <button class="submit" type="submit">Submit</button>
         <div className={`message ${isValid ? "success" : "error"}`}>
