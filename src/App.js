@@ -10,7 +10,7 @@ export default function App() {
   const emailRules = /\S+@\S+\.\S+/;
   const passwordRules = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-  const validateEmail = useCallback((event) => {
+  const validateEmail = (event) => {
     const email = event.target.value;
     if (emailRules.test(email)) {
       setIsValid(true);
@@ -19,7 +19,7 @@ export default function App() {
       setIsValid(false);
       setMessage('❗Please enter a valid email!');
     }
-  });
+  };
 
   const validatePassword = (event) => {
     const password = event.target.value;
